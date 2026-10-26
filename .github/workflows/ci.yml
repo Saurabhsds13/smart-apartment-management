@@ -1,0 +1,265 @@
+# Societix platform — Continuous Integration (task 5.2; design.md "CI (GitHub Actions)"; Req 17.5)
+#
+# Pipeline stages (design.md order):
+#   format check -> lint -> backend build+test (unit + Testcontainers integration + property)
+#   -> frontend build+test (Vitest + Playwright smoke + axe) -> dependency vulnerability scan.
+# The pipeline fails on ANY quality-gate violation (design.md "Quality Gates").
+#
+# -----------------------------------------------------------------------------------------------
+# Action version pinning (Req 17.5 — reproducible, supply-chain-aware builds)
+# -----------------------------------------------------------------------------------------------
+# Every third-party action is pinned to a full 40-char commit SHA, with the human-readable tag
+# recorded in the trailing comment. SHA pinning is the strongest supply-chain guarantee: a moved
+# or re-tagged release cannot silently change what runs here.
+#
+#   actions/checkout@v4.2.2
+#   actions/setup-java@v4.5.0
+#   actions/setup-node@v4.1.0
+#   actions/upload-artifact@v4.4.3
+#   actions/dependency-review-action@v4.4.0
+#
+# -----------------------------------------------------------------------------------------------
+# Known-limitation note (carried from backend tasks 1.4 / 8.3 / 23.7, etc.)
+# -----------------------------------------------------------------------------------------------
+# The Testcontainers-backed tests (tagged "migration" / "testcontainers", and every *IT
+# integration test) require a working Docker daemon. They are annotated
+# @Testcontainers(disabledWithoutDocker = true), so on a machine WITHOUT Docker they are honestly
+# SKIPPED — never faked as passing. Several of these were therefore only compile-verified during
+# local development (no local Docker). GitHub-hosted Ubuntu runners DO provide a Docker daemon, so
+# CI is the environment where those migration / RLS / concurrency tests actually execute end to end.
+# `mvn verify` runs the full suite (unit + property + Testcontainers integration) in the backend job.
+
+name: CI
+
+# Run on pushes to the main line and on every pull request targeting it.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel superseded runs on the same ref to save runner minutes; never cancel on main.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+# Least-privilege default token. Individual jobs widen scope only where required.
+permissions:
+  contents: read
+
+jobs:
+  # ===============================================================================================
+  # Stage 1+2+3 — backend: format check -> lint -> build + test
+  # (unit + jqwik property tests + Testcontainers integration, incl. "migration"/"testcontainers").
+  # ===============================================================================================
+  backend:
+    name: Backend (format, lint, build + test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      # JDK 21 (Temurin). setup-java's built-in Maven cache keys off the pom files.
+      - name: Set up JDK 21 (Temurin) with Maven cache
+        uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4.5.0
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      # Format gate — only if a formatter plugin (Spotless) is wired into the build.
+      # Spotless' check goal fails the build on any violation; `|| true`-style skips are NOT used.
+      # If Spotless is not configured yet, the grep guard turns this into an explicit no-op so the
+      # pipeline stays green until the plugin is added (format/lint "if configured").
+      - name: Format check (Spotless, if configured)
+        run: |
+          if grep -q "spotless-maven-plugin" pom.xml; then
+            echo "Spotless detected — enforcing format check."
+            ./mvnw -B -ntp spotless:check
+          else
+            echo "No Spotless plugin in pom.xml — skipping format check (not configured)."
+          fi
+
+      # Lint gate — only if a static-analysis plugin (Checkstyle / PMD / SpotBugs) is wired in.
+      - name: Lint (Checkstyle/PMD/SpotBugs, if configured)
+        run: |
+          if grep -Eq "maven-checkstyle-plugin|maven-pmd-plugin|spotbugs-maven-plugin" pom.xml; then
+            echo "Static-analysis plugin detected — running lint gate."
+            if grep -q "maven-checkstyle-plugin" pom.xml; then ./mvnw -B -ntp checkstyle:check; fi
+            if grep -q "maven-pmd-plugin"       pom.xml; then ./mvnw -B -ntp pmd:check;       fi
+            if grep -q "spotbugs-maven-plugin"   pom.xml; then ./mvnw -B -ntp spotbugs:check;  fi
+          else
+            echo "No lint plugin in pom.xml — skipping lint (not configured)."
+          fi
+
+      # Build + full test suite. GitHub-hosted runners provide Docker, so the Testcontainers
+      # integration tests (migration/RLS/concurrency) and jqwik property tests run for real here.
+      # `verify` binds past `test` (unit + property) into the integration-test/verify phases.
+      # -B batch mode, -ntp no transfer progress, -e errors, --fail-at-end surfaces every failure.
+      - name: Build and test (mvn verify — unit + property + Testcontainers)
+        run: ./mvnw -B -ntp -e --fail-at-end verify
+
+      # Preserve reports for debugging failed runs. Always upload, even on failure.
+      - name: Upload backend test reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        with:
+          name: backend-test-reports
+          path: |
+            backend/target/surefire-reports/
+            backend/target/failsafe-reports/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  # ===============================================================================================
+  # Stage 4 — frontend: build + test (typecheck, lint, Vitest, Playwright smoke, axe).
+  # ===============================================================================================
+  frontend:
+    name: Frontend (typecheck, lint, Vitest, Playwright + axe)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      # Node.js 20 LTS ("Iron"). setup-node caches the npm download cache keyed off the lockfile.
+      - name: Set up Node.js 20 LTS with npm cache
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      # Reproducible install from the committed lockfile; fails if lockfile and manifest disagree.
+      - name: Install dependencies (npm ci)
+        run: npm ci
+
+      # Type gate — the frontend's `build` runs `tsc --noEmit` too, but we fail fast on types here.
+      - name: Typecheck (tsc --noEmit)
+        run: npm run typecheck
+
+      # Lint gate — only if a `lint` script exists (added with ESLint in a later task).
+      # `--if-present` makes this a no-op (exit 0) until the script is wired in; when present, a
+      # lint violation returns non-zero and fails the pipeline.
+      - name: Lint (ESLint, if configured)
+        run: npm run lint --if-present
+
+      # Production build — `tsc --noEmit && vite build`. A broken build fails the pipeline.
+      - name: Build (vite build)
+        run: npm run build
+
+      # Unit tests (Vitest). `--if-present` keeps CI green until the test script is added
+      # (frontend test harness is task 4.4); once present, failing tests fail the pipeline.
+      - name: Unit tests (Vitest, if configured)
+        run: npm run test --if-present
+
+      # Playwright E2E smoke + axe accessibility checks. Browsers are installed only when a
+      # Playwright config is actually present, avoiding a slow no-op download otherwise.
+      - name: Install Playwright browsers (if Playwright configured)
+        run: |
+          if [ -f playwright.config.ts ] || [ -f playwright.config.js ]; then
+            echo "Playwright config detected — installing browsers with system deps."
+            npx playwright install --with-deps
+          else
+            echo "No Playwright config — skipping browser install (not configured)."
+          fi
+
+      - name: E2E smoke + accessibility (Playwright + axe, if configured)
+        run: npm run test:e2e --if-present
+
+      # Preserve Playwright/axe artifacts (HTML report, traces) for debugging failed runs.
+      - name: Upload Playwright report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        with:
+          name: playwright-report
+          path: |
+            frontend/playwright-report/
+            frontend/test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  # ===============================================================================================
+  # Stage 5 — dependency vulnerability scan (backend + frontend).
+  #
+  # Pragmatic, pinned approach:
+  #  * Frontend: `npm audit` at a fixed severity threshold (high) — a native, zero-extra-action
+  #    gate that fails the build when a high/critical advisory affects the dependency tree.
+  #  * Backend: OWASP dependency-check via the Maven plugin, invoked only when it is wired into the
+  #    pom (so this stays green until the plugin is added), failing on CVSS >= 7 (high).
+  #  * PR-only: GitHub's dependency-review-action blocks a PR that introduces a vulnerable or
+  #    disallowed-license dependency, scoped to pull_request events where the base/head diff exists.
+  # Any one of these failing fails the overall pipeline (quality-gate violation).
+  # ===============================================================================================
+  dependency-scan:
+    name: Dependency vulnerability scan
+    runs-on: ubuntu-latest
+    # Run after build+test so a scan failure is clearly separable from a compile/test failure, and
+    # needless scans are skipped when the code itself is broken.
+    needs: [backend, frontend]
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      # --- Frontend: npm audit -----------------------------------------------------------------
+      - name: Set up Node.js 20 LTS with npm cache
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies (npm ci)
+        working-directory: frontend
+        run: npm ci
+
+      # Fails (non-zero exit) when any dependency has a HIGH or CRITICAL advisory.
+      - name: npm audit (fail on high/critical)
+        working-directory: frontend
+        run: npm audit --audit-level=high
+
+      # --- Backend: OWASP dependency-check (only if wired into the pom) ------------------------
+      - name: Set up JDK 21 (Temurin) with Maven cache
+        uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4.5.0
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: OWASP dependency-check (backend, if configured)
+        working-directory: backend
+        run: |
+          if grep -q "dependency-check-maven" pom.xml; then
+            echo "OWASP dependency-check plugin detected — scanning backend dependencies."
+            ./mvnw -B -ntp org.owasp:dependency-check-maven:check
+          else
+            echo "No dependency-check-maven plugin in pom.xml — skipping backend scan (not configured)."
+          fi
+
+  # ===============================================================================================
+  # Stage 5 (PR gate) — GitHub dependency review on pull requests only.
+  # Separated into its own job because dependency-review-action requires a base..head diff that
+  # only exists for pull_request events; running it on push would error.
+  # ===============================================================================================
+  dependency-review:
+    name: Dependency review (PR only)
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Review dependency changes (fail on high)
+        uses: actions/dependency-review-action@4081bf99e2866ebe428fc0477b69eb4fcda7220a # v4.4.0
+        with:
+          fail-on-severity: high

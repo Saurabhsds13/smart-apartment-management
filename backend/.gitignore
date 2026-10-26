@@ -1,0 +1,13 @@
+# Maven build output
+target/
+
+# IDE / tooling
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# Maven wrapper: keep the scripts and config, ignore any downloaded distribution
+.mvn/wrapper/maven-wrapper.jar

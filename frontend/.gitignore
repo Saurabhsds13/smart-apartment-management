@@ -1,0 +1,19 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vite
+*.tsbuildinfo
+
+# Test artifacts
+coverage
+playwright-report
+test-results
+blob-report
+.playwright
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store

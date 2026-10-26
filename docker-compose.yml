@@ -1,0 +1,122 @@
+# Societix — local development stack (design.md "Docker-Based Development" / "Local
+# Development"). Brings up four services:
+#
+#   postgres  — PostgreSQL datastore (Flyway migrates it on app startup).
+#   app       — the Spring Boot modular-monolith backend, built from ./backend.
+#   frontend  — the Vite dev server (React + TypeScript), built from ./frontend.
+#   mailhog   — local SMTP sink that captures outbound email (Req A4); web UI on :8025.
+#
+# Configuration is entirely environment-driven. Copy `.env.example` to `.env` and fill in
+# local values; docker-compose loads `.env` automatically. Secrets are NEVER committed
+# (Req 17.5) — `.env` is git-ignored.
+#
+# Tenant-isolation / RLS note (infra/README.md, design ADR-2): the application must connect
+# as a NON-SUPERUSER role WITHOUT BYPASSRLS so PostgreSQL Row-Level Security (task 8.2) is
+# actually enforced. The Postgres container's `POSTGRES_USER` is a superuser used only to
+# own the database and run the role-bootstrap init script; the app connects as the separate
+# runtime role defined by SOCIETIX_DB_USERNAME (created by ./infra/db-init). Flyway runs as
+# the migration/owner role in CI/deploy; for local dev the superuser owns the schema.
+
+services:
+  postgres:
+    # Pinned major.minor image (no `latest`) for reproducible local environments.
+    image: postgres:16.4-bookworm
+    container_name: societix-postgres
+    environment:
+      # Superuser / owner role — local dev only; real environments provision roles out of
+      # band (infra/README.md). Used to create the DB and the non-superuser runtime role.
+      POSTGRES_USER: ${POSTGRES_SUPERUSER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_SUPERUSER_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-societix}
+      # Passed through to the init script so it can create the non-superuser runtime role
+      # the app connects as (NON-SUPERUSER, NOBYPASSRLS per infra/README.md).
+      SOCIETIX_DB_USERNAME: ${SOCIETIX_DB_USERNAME:-societix_app}
+      SOCIETIX_DB_PASSWORD: ${SOCIETIX_DB_PASSWORD:-societix_app}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      # Named volume keeps data across `docker compose down` (removed only with `-v`).
+      - postgres-data:/var/lib/postgresql/data
+      # Role-bootstrap scripts run once, on first initialization of an empty data dir.
+      - ./infra/db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      # App waits for this to pass (depends_on: condition: service_healthy).
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_SUPERUSER:-postgres} -d ${POSTGRES_DB:-societix}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+  app:
+    # Built from ./backend (design: "the app (backend) ... built from backend/").
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: societix-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-local}
+      # Datasource points at the non-superuser runtime role (see note above). Host is the
+      # compose service name `postgres`, not localhost.
+      SOCIETIX_DB_URL: ${SOCIETIX_DB_URL:-jdbc:postgresql://postgres:5432/societix}
+      SOCIETIX_DB_USERNAME: ${SOCIETIX_DB_USERNAME:-societix_app}
+      SOCIETIX_DB_PASSWORD: ${SOCIETIX_DB_PASSWORD:-societix_app}
+      # Outbound email is captured by MailHog in local dev (Req A4).
+      SOCIETIX_MAIL_HOST: ${SOCIETIX_MAIL_HOST:-mailhog}
+      SOCIETIX_MAIL_PORT: ${SOCIETIX_MAIL_PORT:-1025}
+      SOCIETIX_MAIL_USERNAME: ${SOCIETIX_MAIL_USERNAME:-}
+      SOCIETIX_MAIL_PASSWORD: ${SOCIETIX_MAIL_PASSWORD:-}
+      SOCIETIX_MAIL_SMTP_AUTH: ${SOCIETIX_MAIL_SMTP_AUTH:-false}
+      SOCIETIX_MAIL_SMTP_STARTTLS: ${SOCIETIX_MAIL_SMTP_STARTTLS:-false}
+      # File storage — local filesystem volume in dev (design "File Storage Strategy").
+      SOCIETIX_STORAGE_PROVIDER: ${SOCIETIX_STORAGE_PROVIDER:-filesystem}
+      SOCIETIX_STORAGE_LOCATION: ${SOCIETIX_STORAGE_LOCATION:-/var/societix/files}
+      SOCIETIX_STORAGE_BUCKET: ${SOCIETIX_STORAGE_BUCKET:-}
+      # Session / cookie settings (design ADR-3).
+      SOCIETIX_SESSION_COOKIE_SECURE: ${SOCIETIX_SESSION_COOKIE_SECURE:-false}
+      SOCIETIX_SESSION_COOKIE_SAMESITE: ${SOCIETIX_SESSION_COOKIE_SAMESITE:-Lax}
+      SOCIETIX_SESSION_TIMEOUT_MINUTES: ${SOCIETIX_SESSION_TIMEOUT_MINUTES:-30}
+      # MFA secret-encryption key — MUST be supplied; no safe default (Req 17.5, 24.4).
+      SOCIETIX_MFA_ENCRYPTION_KEY: ${SOCIETIX_MFA_ENCRYPTION_KEY:?set SOCIETIX_MFA_ENCRYPTION_KEY in .env}
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    volumes:
+      # Local file-storage target backed by a named volume (survives restarts).
+      - app-files:/var/societix/files
+    restart: unless-stopped
+
+  frontend:
+    # Built from ./frontend; runs the Vite dev server (design "Local Development").
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: societix-frontend
+    depends_on:
+      - app
+    environment:
+      # The Vite /api proxy targets the backend service (vite.config.ts VITE_BACKEND_ORIGIN).
+      VITE_BACKEND_ORIGIN: ${VITE_BACKEND_ORIGIN:-http://app:8080}
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    volumes:
+      # Bind-mount source for hot reload; keep the image's node_modules (anonymous volume)
+      # so the host OS does not shadow the container-installed dependencies.
+      - ./frontend:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+  mailhog:
+    # Local SMTP capture: SMTP on 1025, web UI on 8025 (Req A4). Pinned version.
+    image: mailhog/mailhog:v1.0.1
+    container_name: societix-mailhog
+    ports:
+      - "${MAILHOG_SMTP_PORT:-1025}:1025"
+      - "${MAILHOG_UI_PORT:-8025}:8025"
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  app-files:

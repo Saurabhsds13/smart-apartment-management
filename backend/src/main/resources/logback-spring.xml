@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Societix backend logging configuration (Req 21.1, 21.2, 21.4, 21.5).
+
+  Approach / justification
+  ------------------------
+  We use Spring Boot 3.4's BUILT-IN structured logging (org.springframework.boot.logging.logback.
+  StructuredLogEncoder) rather than adding a third-party encoder such as net.logstash.logback.
+  Rationale:
+    * The project is pinned to Spring Boot 3.4.5 (see pom.xml), whose managed logging stack ships
+      native JSON structured logging in the Elastic Common Schema (ECS), Logstash, and GELF formats.
+      Using it keeps the dependency set minimal and reproducible — NO new dependency or version pin
+      is introduced (satisfying the Req 17.5 / A1 "pin every version" discipline by simply not
+      adding one).
+    * The built-in ECS encoder automatically serializes every MDC key/value pair into the JSON
+      object. That is exactly how the per-request `correlationId` (set by CorrelationIdFilter) and
+      the `societyId` (set where available by the tenant-context filter, task 7.2) appear on EVERY
+      structured log line without any per-statement wiring (Req 21.1).
+
+  Profile gating
+  --------------
+  * local / test : human-readable console pattern (easier local debugging). The pattern still
+    prints the correlation id and society id from the MDC so developers see them while iterating.
+  * prod (and any other profile) : JSON (ECS) via StructuredLogEncoder for machine ingestion by log
+    aggregators (ElasticSearch/OpenSearch/Logstash/Graylog).
+
+  Logging hygiene (Req 21.4, 21.5)
+  --------------------------------
+  * Only non-sensitive correlation metadata (correlationId, societyId) is added to the MDC and thus
+    to log lines. NEVER log secrets (passwords, tokens, MFA secrets, session ids) or full PII
+    records. Application code is responsible for not passing such values into log messages; this
+    configuration deliberately adds no request-body/header/credential capture.
+  * Audit records are persisted transactionally by the Audit_Service (task 11.1). They are an
+    append-only database artifact and MUST NOT be emitted as log lines in place of that service
+    (Req 21.5). Nothing in this file writes audit data.
+-->
+<configuration>
+    <!-- Pull in Spring Boot's logging defaults (levels, converters, CONSOLE_LOG_* properties). -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!--
+      Readable console pattern for local development and tests. We append the MDC correlation and
+      society ids so they are visible even in the plain-text format; `defaultValue` keeps the line
+      tidy when a key is absent (e.g. pre-auth requests have no societyId yet).
+    -->
+    <springProfile name="local,test">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%X{correlationId:-no-correlation-id}] [society=%X{societyId:-n/a}] %logger{36} - %msg%n
+                </pattern>
+                <charset>${CONSOLE_LOG_CHARSET}</charset>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <!--
+      Structured JSON (ECS) for production and any non-local/test profile. The StructuredLogEncoder
+      writes one JSON object per line and automatically includes every MDC entry, so `correlationId`
+      and `societyId` are present on every log line (Req 21.1). `service.name` ties lines to this
+      application for downstream filtering.
+    -->
+    <springProfile name="!local &amp; !test">
+        <appender name="JSON_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="org.springframework.boot.logging.logback.StructuredLogEncoder">
+                <format>ecs</format>
+                <charset>${CONSOLE_LOG_CHARSET}</charset>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="JSON_CONSOLE"/>
+        </root>
+    </springProfile>
+</configuration>

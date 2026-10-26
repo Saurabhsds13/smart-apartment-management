@@ -1,0 +1,1080 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Create monorepo directory structure": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976010
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793009000535
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793009538170
+      }
+    ],
+    "1.2 Bootstrap Spring Boot 3.x + Java 21 Maven project": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976107
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793009556075
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793010078568
+      }
+    ],
+    "1.3 Configure PostgreSQL + Flyway baseline and initial migration": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976179
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793010092402
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793010966840
+      }
+    ],
+    "1.4 Write migration test harness with Testcontainers": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976255
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793018645070
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019120182
+      }
+    ],
+    "2.1 Implement RFC 7807 error envelope and global exception handler": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976313
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793010976742
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793018632135
+      }
+    ],
+    "2.2 Implement structured JSON logging with correlation-id filter": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976379
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793018643220
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019121191
+      }
+    ],
+    "2.3 Configure Actuator health/readiness/liveness and Micrometer metrics": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976443
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019127299
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019386899
+      }
+    ],
+    "2.4 Configure springdoc OpenAPI at /api/v1": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976525
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019387888
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019591452
+      }
+    ],
+    "2.5 Write unit tests for error envelope and correlation-id propagation": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976588
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019601037
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793020046108
+      }
+    ],
+    "3.1 Implement ArchUnit boundary tests": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976648
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793018644204
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019119275
+      }
+    ],
+    "4.1 Bootstrap Vite + React + TypeScript (strict)": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976709
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793009001219
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793009538927
+      }
+    ],
+    "4.2 Implement Tailwind design tokens and base accessible component library": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976779
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793010977705
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793018631281
+      }
+    ],
+    "4.3 Implement application shell and providers": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976846
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019602227
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793020047250
+      }
+    ],
+    "4.4 Set up Vitest/RTL + Playwright + axe harness": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976914
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793020049344
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793025279285
+      }
+    ],
+    "5.1 Create docker-compose and environment config": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008976986
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793010978662
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793018630137
+      }
+    ],
+    "5.2 Create GitHub Actions CI workflow": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977070
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019602935
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793020048152
+      }
+    ],
+    "6. M1 Checkpoint": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977146
+      },
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793025319258
+      }
+    ],
+    "7.1 Create societies entity and migration": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977216
+      }
+    ],
+    "7.2 Implement TenantContext request-scoped holder": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977288
+      }
+    ],
+    "7.3 Implement central tenant-scoping base repository and Hibernate filter": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977361
+      }
+    ],
+    "7.4 Write property test for tenant-context requirement": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977453
+      }
+    ],
+    "7.5 Write tenant-isolation tests for the scoping layer": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977513
+      }
+    ],
+    "8.1 Implement RLS GUC setter and connection-pool reset": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977576
+      }
+    ],
+    "8.2 Add RLS policies via Flyway migration": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977641
+      }
+    ],
+    "8.3 Write integration tests for RLS enforcement": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977718
+      }
+    ],
+    "9.1 Create users and user_society_memberships entities and migrations": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977791
+      }
+    ],
+    "9.2 Implement adaptive password hashing": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977863
+      }
+    ],
+    "9.3 Write property test for password hashing": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977924
+      }
+    ],
+    "10.1 Implement Spring Security server-side sessions with secure cookies + CSRF": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008977991
+      }
+    ],
+    "10.2 Implement login throttling/lockout and session lifetime policy": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978065
+      }
+    ],
+    "10.3 Implement password reset and email verification": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978163
+      }
+    ],
+    "10.4 Write authentication and session-policy tests": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978224
+      }
+    ],
+    "11.1 Create audit_records entity, migration, and AuditService": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978307
+      }
+    ],
+    "11.2 Write property test for audit atomicity": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978365
+      }
+    ],
+    "11.3 Write integration test for audit immutability": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978428
+      }
+    ],
+    "12.1 Encode the Permission Matrix and role/permission model": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978495
+      }
+    ],
+    "12.2 Implement function-level authorization": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978570
+      }
+    ],
+    "12.3 Implement object-level (BOLA/IDOR) checks": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978642
+      }
+    ],
+    "12.4 Write property test for permission-matrix enforcement": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978715
+      }
+    ],
+    "12.5 Write object-level tenant-isolation tests (BOLA/IDOR)": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978779
+      }
+    ],
+    "13.1 Create mfa_credentials entity and TOTP enrollment": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978846
+      }
+    ],
+    "13.2 Enforce MFA for privileged roles and step-up reauthentication": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978909
+      }
+    ],
+    "13.3 Write property test for MFA enforcement": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008978978
+      }
+    ],
+    "13.4 Write MFA unit/integration tests": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979042
+      }
+    ],
+    "14. M2 Checkpoint — identity and tenant isolation": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979109
+      }
+    ],
+    "15.1 Implement buildings and flats entities, migrations, and CRUD": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979173
+      }
+    ],
+    "15.2 Write property test for flat-identifier uniqueness": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979244
+      }
+    ],
+    "15.3 Write authorization and tenant-isolation tests for buildings/flats": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979310
+      }
+    ],
+    "15.4 Build frontend building/flat management screens": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979373
+      }
+    ],
+    "16.1 Implement resident_associations entity, migration, and lifecycle": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979431
+      }
+    ],
+    "16.2 Write property test for single active tenant association": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979486
+      }
+    ],
+    "16.3 Write authorization and tenant-isolation tests for residents": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979543
+      }
+    ],
+    "16.4 Build role-aware resident directory and dashboards": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979645
+      }
+    ],
+    "17. M3 Checkpoint": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979707
+      }
+    ],
+    "18.1 Implement notifications entities, migration, and NotificationService": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979761
+      }
+    ],
+    "18.2 Write unit tests for notification creation and delivery handling": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979814
+      }
+    ],
+    "18.3 Build frontend notification UI": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979878
+      }
+    ],
+    "19.1 Implement announcements entity, migration, and publishing with targeting": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008979945
+      }
+    ],
+    "19.2 Write property test for announcement notification fan-out": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980032
+      }
+    ],
+    "19.3 Write authorization and tenant-isolation tests for announcements": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980107
+      }
+    ],
+    "19.4 Build announcement publish/list screens": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980177
+      }
+    ],
+    "20.1 Implement maintenance_requests entity, migration, and lifecycle": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980257
+      }
+    ],
+    "20.2 Write authorization and tenant-isolation tests for maintenance requests": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980343
+      }
+    ],
+    "20.3 Build maintenance request screens": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980423
+      }
+    ],
+    "21. M4 Checkpoint": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980507
+      }
+    ],
+    "22.1 Implement charge_rules and charge_rule_versions entities and migrations": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980593
+      }
+    ],
+    "22.2 Write unit tests for charge-rule validation and versioning": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980663
+      }
+    ],
+    "23.1 Implement BigDecimal monetary arithmetic utilities": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980733
+      }
+    ],
+    "23.2 Implement invoices and invoice_lines entities, migrations, and charge engine": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980813
+      }
+    ],
+    "23.3 Implement idempotent invoice-run guard and no historical recalculation": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008980938
+      }
+    ],
+    "23.4 Write property test for monetary structure and reconciliation": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981026
+      }
+    ],
+    "23.5 Write property test for no silent historical recalculation": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981119
+      }
+    ],
+    "23.6 Write property test for invoice-generation idempotency": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981205
+      }
+    ],
+    "23.7 Write concurrency test for simultaneous invoice runs": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981280
+      }
+    ],
+    "24.1 Implement per-flat collection status read model": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981364
+      }
+    ],
+    "24.2 Build charge-rule and invoicing screens": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981526
+      }
+    ],
+    "25.1 Implement receipts, payments, and allocation entities and migrations": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981608
+      }
+    ],
+    "25.2 Implement overpayment credits and credit allocation": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981721
+      }
+    ],
+    "25.3 Implement adjustments, refunds, and auditable payment ledger": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981794
+      }
+    ],
+    "25.4 Write property test for money conservation": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981877
+      }
+    ],
+    "25.5 Write property test for duplicate payment-reference rejection": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008981948
+      }
+    ],
+    "25.6 Write financial-correctness and concurrency tests": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982026
+      }
+    ],
+    "25.7 Build payment recording and receipt screens": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982111
+      }
+    ],
+    "26. M5 Checkpoint — billing and payments": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982197
+      }
+    ],
+    "27.1 Implement visitor_records entity, migration, and entry/exit": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982288
+      }
+    ],
+    "27.2 Implement visitor approval coordination": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982373
+      }
+    ],
+    "27.3 Write authorization and tenant-isolation tests for visitors": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982487
+      }
+    ],
+    "27.4 Build visitor entry/exit and approval screens": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982580
+      }
+    ],
+    "28. M6 Checkpoint": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982663
+      }
+    ],
+    "29.1 Implement facilities entity, migration, and configuration": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982756
+      }
+    ],
+    "29.2 Implement bookings entity, migration, and lifecycle with conflict prevention": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982846
+      }
+    ],
+    "29.3 Write property test for booking non-overlap": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008982937
+      }
+    ],
+    "29.4 Write concurrency and authorization tests for bookings": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983067
+      }
+    ],
+    "29.5 Build facility and booking screens": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983160
+      }
+    ],
+    "30. M7 Checkpoint": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983246
+      }
+    ],
+    "31.1 Implement financial and operational reports": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983327
+      }
+    ],
+    "31.2 Implement CSV export with tenant scoping": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983412
+      }
+    ],
+    "31.3 Write tenant-isolation and read-only tests for reports": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983493
+      }
+    ],
+    "31.4 Build report screens with zero-state and CSV download": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983576
+      }
+    ],
+    "32.1 Implement society onboarding with atomic provisioning": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983660
+      }
+    ],
+    "32.2 Implement suspension, reactivation, and audited drill-down": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983750
+      }
+    ],
+    "32.3 Write property test for society provisioning atomicity": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983829
+      }
+    ],
+    "32.4 Write tenant-isolation tests for platform metrics and drill-down": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983917
+      }
+    ],
+    "32.5 Build platform-admin screens": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008983995
+      }
+    ],
+    "33. M8 Checkpoint": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984079
+      }
+    ],
+    "34.1 Implement rate limiting on sensitive endpoints": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984179
+      }
+    ],
+    "34.2 Implement secure file upload/storage and brokered URLs": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984270
+      }
+    ],
+    "34.3 Write property test for file URL expiry and authorization": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984346
+      }
+    ],
+    "34.4 Write tenant-isolation tests for file access": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984471
+      }
+    ],
+    "35.1 Implement category-specific retention policies and jobs": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984546
+      }
+    ],
+    "35.2 Write property test for category-specific retention": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984622
+      }
+    ],
+    "35.3 Write tenant-isolation tests for background jobs": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984696
+      }
+    ],
+    "36.1 Implement consent and data-principal request capabilities": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984780
+      }
+    ],
+    "36.2 Implement grievance, breach, processor, and tenant-termination capabilities": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984863
+      }
+    ],
+    "36.3 Write unit tests for privacy capabilities": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008984946
+      }
+    ],
+    "37.1 Run accessibility conformance pass": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985030
+      }
+    ],
+    "37.2 Add performance validation against p95 targets": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985111
+      }
+    ],
+    "37.3 Implement observability dashboards": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985191
+      }
+    ],
+    "37.4 Implement encrypted backup + restore verification and deployment docs": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985275
+      }
+    ],
+    "38. M9 Checkpoint": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985363
+      }
+    ],
+    "39.1 Write end-to-end Playwright journeys across MVP": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985450
+      }
+    ],
+    "39.2 Implement onboarding/data-import workflow": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985568
+      }
+    ],
+    "39.3 Author admin and resident documentation": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985723
+      }
+    ],
+    "39.4 Create privacy/legal review checklist, release checklist, and known-limitations register": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985843
+      }
+    ],
+    "40. M10 Final checkpoint": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793008985988
+      }
+    ],
+    "3. M1 — ArchUnit module-boundary test harness": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019119408
+      }
+    ],
+    "1. M1 — Monorepo layout and backend project bootstrap": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793019120295
+      }
+    ],
+    "2. M1 — Cross-cutting backend foundations": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793020046255
+      }
+    ],
+    "5. M1 — CI pipeline (GitHub Actions)": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793020048269
+      }
+    ],
+    "4. M1 — Frontend bootstrap and accessible shell": [
+      {
+        "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793025279345
+      }
+    ]
+  }
+}

@@ -1,0 +1,133 @@
+/**
+ * Societix design tokens (Tailwind v4 `@theme`).
+ *
+ * Premium visual direction (design.md): a restrained, trustworthy aesthetic for
+ * a finance-adjacent product.
+ *   - Deep NAVY / CHARCOAL foundation for headers, primary surfaces, navigation.
+ *   - Restrained TEAL / EMERALD accents reserved for primary actions, selection,
+ *     and positive financial states.
+ *   - Neutral surfaces (warm grays / off-white) for dense, readable content.
+ *
+ * Light theme first. All text/background pairings used by the component library
+ * target WCAG 2.2 AA (>=4.5:1 for text, >=3:1 for UI/graphical elements). Key
+ * verified pairings (approx contrast ratios against their intended surfaces):
+ *   - text-primary  #10212e  on surface #ffffff  -> ~16.5:1
+ *   - text-secondary#45586a  on surface #ffffff  -> ~7.0:1
+ *   - accent  #0f766e (teal-700) on #ffffff      -> ~5.3:1  (text + large UI)
+ *   - on-accent #ffffff on accent #0f766e        -> ~5.3:1
+ *   - danger  #b42318 on #ffffff                 -> ~6.2:1
+ *   - navy foundation #10212e with on-navy #f4f7fa text -> ~15:1
+ * Values are centralized here so theming (incl. a future dark theme) stays in
+ * one place.
+ */
+
+@theme {
+  /* ---- Foundation: deep navy / charcoal ------------------------------- */
+  --color-navy-50: #eef2f6;
+  --color-navy-100: #d6e0e9;
+  --color-navy-200: #aec2d2;
+  --color-navy-300: #7f9cb4;
+  --color-navy-400: #4f7290;
+  --color-navy-500: #2f536f;
+  --color-navy-600: #1f3c52;
+  --color-navy-700: #163041;
+  --color-navy-800: #10212e;
+  --color-navy-900: #0a151d;
+
+  /* ---- Accent: restrained teal / emerald ------------------------------ */
+  --color-teal-50: #effbf8;
+  --color-teal-100: #d5f3ed;
+  --color-teal-200: #a8e6db;
+  --color-teal-300: #6fd1c3;
+  --color-teal-400: #37b3a3;
+  --color-teal-500: #159384;
+  --color-teal-600: #0f766e;
+  --color-teal-700: #0d5d58;
+  --color-teal-800: #0e4a47;
+  --color-teal-900: #0b3b39;
+
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+
+  /* ---- Neutral surfaces: warm grays / off-white ----------------------- */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f8f9fb;
+  --color-neutral-100: #f1f3f6;
+  --color-neutral-200: #e4e8ee;
+  --color-neutral-300: #cfd6e0;
+  --color-neutral-400: #a7b2c0;
+  --color-neutral-500: #74839a;
+  --color-neutral-600: #45586a;
+  --color-neutral-700: #334252;
+  --color-neutral-800: #1f2b38;
+  --color-neutral-900: #10212e;
+
+  /* ---- Status (financial + system feedback) --------------------------- */
+  --color-success-50: #ecfdf5;
+  --color-success-500: #059669;
+  --color-success-700: #047857;
+  --color-warning-50: #fffaeb;
+  --color-warning-500: #b54708;
+  --color-warning-700: #93370d;
+  --color-danger-50: #fef3f2;
+  --color-danger-500: #b42318;
+  --color-danger-700: #912018;
+  --color-info-50: #eff8ff;
+  --color-info-500: #175cd3;
+  --color-info-700: #1849a9;
+
+  /* ---- Semantic aliases (what components actually reference) ---------- */
+  --color-surface: var(--color-neutral-0);
+  --color-surface-muted: var(--color-neutral-50);
+  --color-surface-sunken: var(--color-neutral-100);
+  --color-border: var(--color-neutral-200);
+  --color-border-strong: var(--color-neutral-300);
+
+  --color-foundation: var(--color-navy-800);
+  --color-on-foundation: var(--color-neutral-50);
+
+  --color-text-primary: var(--color-navy-800);
+  --color-text-secondary: var(--color-neutral-600);
+  --color-text-disabled: var(--color-neutral-400);
+
+  --color-accent: var(--color-teal-600);
+  --color-accent-hover: var(--color-teal-700);
+  --color-accent-active: var(--color-teal-800);
+  --color-on-accent: var(--color-neutral-0);
+  --color-accent-subtle: var(--color-teal-50);
+
+  --color-focus-ring: var(--color-teal-600);
+
+  /* ---- Typography scale ----------------------------------------------- */
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  /* ---- Radius --------------------------------------------------------- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+
+  /* ---- Elevation ------------------------------------------------------ */
+  --shadow-xs: 0 1px 2px 0 rgb(16 33 46 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(16 33 46 / 0.1), 0 1px 2px -1px rgb(16 33 46 / 0.1);
+  --shadow-md:
+    0 4px 6px -1px rgb(16 33 46 / 0.1), 0 2px 4px -2px rgb(16 33 46 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px rgb(16 33 46 / 0.12), 0 4px 6px -4px rgb(16 33 46 / 0.1);
+  --shadow-xl:
+    0 20px 25px -5px rgb(16 33 46 / 0.14), 0 8px 10px -6px rgb(16 33 46 / 0.1);
+}

@@ -1,0 +1,36 @@
+# Societix — repository-root ignore rules.
+#
+# Module-specific ignores also live in backend/.gitignore and frontend/.gitignore; this
+# root file covers cross-cutting concerns (secrets, build outputs, IDE/OS cruft) so they
+# are excluded no matter where they appear.
+
+# --- Secrets / environment (Req 17.5) -----------------------------------------
+# Never commit real environment files; only `.env.example` (placeholders) is tracked.
+.env
+.env.*
+!.env.example
+
+# --- Backend build output (Maven) ---------------------------------------------
+target/
+# Maven wrapper: keep the scripts/config, ignore any downloaded distribution jar.
+.mvn/wrapper/maven-wrapper.jar
+
+# --- Frontend build output / deps (Node + Vite) -------------------------------
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.tsbuildinfo
+*.local
+
+# --- IDE / editor -------------------------------------------------------------
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# --- OS cruft -----------------------------------------------------------------
+.DS_Store
+Thumbs.db

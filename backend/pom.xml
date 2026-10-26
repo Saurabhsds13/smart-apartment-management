@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Societix platform backend — modular-monolith Spring Boot application.
+
+  Version pinning rationale (design.md "Technology Stack"; Req 17.5, A1):
+  - Spring Boot 3.4.5 is the latest stable Spring Boot 3.x line at bootstrap time.
+    We deliberately stay on 3.x (not 4.x) per the design's pinned baseline; 3.4 is a
+    supported GA line that manages compatible versions of Spring Framework 6.2,
+    Spring Security 6.4, Hibernate, Flyway 10, Micrometer, and the PostgreSQL driver.
+  - Java 21 LTS is the fixed language level (records, pattern matching, virtual threads).
+  - Every third-party version is pinned explicitly (either via the Spring Boot BOM, which
+    itself pins exact versions, or via an explicit <version> / property below) so builds
+    are reproducible. Dependencies whose versions are NOT governed by the Spring Boot BOM
+    (springdoc-openapi, jqwik) are pinned here as properties.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.5</version>
+        <relativePath/> <!-- resolve the Spring Boot BOM from the repository -->
+    </parent>
+
+    <groupId>com.societix</groupId>
+    <artifactId>societix-backend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>societix-backend</name>
+    <description>Societix smart-apartment-management platform (modular monolith)</description>
+
+    <properties>
+        <!-- Language level: Java 21 LTS, fixed by the design. -->
+        <java.version>21</java.version>
+        <maven.compiler.release>21</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--
+          Versions NOT managed by the Spring Boot 3.4.5 BOM — pinned explicitly here.
+          springdoc 2.8.x targets Spring Boot 3.4 / Spring 6.2 and OpenAPI 3.1.
+          jqwik 1.9.x is the property-based testing engine for JUnit 5.
+        -->
+        <springdoc.version>2.8.6</springdoc.version>
+        <jqwik.version>1.9.2</jqwik.version>
+        <!-- ArchUnit: module-boundary enforcement tests (design "Module Architecture"; Req A1). -->
+        <archunit.version>1.3.0</archunit.version>
+    </properties>
+
+    <dependencies>
+        <!-- ===================== Runtime / production ===================== -->
+
+        <!-- Web (REST controllers, embedded Tomcat, Jackson). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Security (server-side authN/authZ — Req 17.1). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- Data JPA + Hibernate (persistence). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Bean Validation (jakarta.validation — Req 17.2, 17.3). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Mail (SMTP email abstraction — notification module). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <!-- Actuator (health/metrics endpoints). Full wiring is a later task. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Micrometer Prometheus registry (metrics backend). -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
+        <!-- Flyway database migrations (core + PostgreSQL support module, Flyway 10+). -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+
+        <!-- PostgreSQL JDBC driver (runtime). -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- springdoc-openapi: OpenAPI 3 + Swagger UI. Full config is a later task. -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+
+        <!-- ===================== Test ===================== -->
+
+        <!-- spring-boot-starter-test bundles JUnit 5, Mockito, AssertJ, Spring Test. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Security test support. -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Testcontainers: real PostgreSQL in integration tests (versions via BOM). -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-testcontainers</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- jqwik: property-based testing (Correctness Properties 1–18). -->
+        <dependency>
+            <groupId>net.jqwik</groupId>
+            <artifactId>jqwik</artifactId>
+            <version>${jqwik.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+          ArchUnit (JUnit 5 integration): enforces modular-monolith boundaries at build time
+          (design "Module Architecture"; Req A1). Not governed by the Spring Boot BOM, so the
+          version is pinned explicitly to a stable 1.x release.
+        -->
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5</artifactId>
+            <version>${archunit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Produces the executable Spring Boot jar. -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!--
+              Surefire must run BOTH the JUnit Platform (JUnit 5) and the jqwik engine.
+              Spring Boot's managed Surefire already supports the JUnit Platform; jqwik
+              registers itself as a platform engine, so no extra config is required here.
+            -->
+        </plugins>
+    </build>
+
+</project>
