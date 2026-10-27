@@ -1,5 +1,14 @@
 {
-  "pbtResults": {},
+  "pbtResults": {
+    "11.2 Write property test for audit atomicity": {
+      "status": "passed",
+      "lastRunTimestamp": 1793099154717
+    },
+    "7.4 Write property test for tenant-context requirement": {
+      "status": "passed",
+      "lastRunTimestamp": 1793108602929
+    }
+  },
   "executionHistory": {
     "1.1 Create monorepo directory structure": [
       {
@@ -290,6 +299,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977216
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793097280601
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793097693799
       }
     ],
     "7.2 Implement TenantContext request-scoped holder": [
@@ -297,6 +316,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977288
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793097281396
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793097694579
       }
     ],
     "7.3 Implement central tenant-scoping base repository and Hibernate filter": [
@@ -304,6 +333,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977361
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793098262994
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099293744
       }
     ],
     "7.4 Write property test for tenant-context requirement": [
@@ -311,6 +350,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977453
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099876396
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793108707417
       }
     ],
     "7.5 Write tenant-isolation tests for the scoping layer": [
@@ -318,6 +367,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977513
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099877368
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793108708761
       }
     ],
     "8.1 Implement RLS GUC setter and connection-pool reset": [
@@ -325,6 +384,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977576
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099315716
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099860394
       }
     ],
     "8.2 Add RLS policies via Flyway migration": [
@@ -332,6 +401,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977641
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099874316
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793108709731
       }
     ],
     "8.3 Write integration tests for RLS enforcement": [
@@ -339,6 +418,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977718
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099878399
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793108711176
       }
     ],
     "9.1 Create users and user_society_memberships entities and migrations": [
@@ -346,6 +435,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977791
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793098264382
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099292936
       }
     ],
     "9.2 Implement adaptive password hashing": [
@@ -353,6 +452,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977863
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099875464
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793108711836
       }
     ],
     "9.3 Write property test for password hashing": [
@@ -360,6 +469,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977924
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793108719419
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793110417132
       }
     ],
     "10.1 Implement Spring Security server-side sessions with secure cookies + CSRF": [
@@ -367,6 +486,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008977991
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793108720386
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793110416149
       }
     ],
     "10.2 Implement login throttling/lockout and session lifetime policy": [
@@ -395,6 +524,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008978307
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793097282271
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793098253181
       }
     ],
     "11.2 Write property test for audit atomicity": [
@@ -402,6 +541,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008978365
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793098265329
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099291479
       }
     ],
     "11.3 Write integration test for audit immutability": [
@@ -409,6 +558,16 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793008978428
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793098266111
+      },
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099290544
       }
     ],
     "12.1 Encode the Permission Matrix and role/permission model": [
@@ -1074,6 +1233,34 @@
         "executionId": "06402615-30da-465c-b638-6cc1b821d2f7",
         "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
         "timestamp": 1793025279345
+      }
+    ],
+    "11. M2 — Audit service (transactional append-only)": [
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793099291575
+      }
+    ],
+    "7. M2 — Tenancy foundation and Society entity": [
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793108708822
+      }
+    ],
+    "8. M2 — PostgreSQL Row-Level Security (defense-in-depth)": [
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793108711902
+      }
+    ],
+    "9. M2 — Identity: users, memberships, password hashing": [
+      {
+        "executionId": "18861675-8c58-48d2-bc23-4c82a85c037a",
+        "chatSessionId": "sess_1e7d0726-e348-42f0-bf02-cb2c6cbb1c7b",
+        "timestamp": 1793110417276
       }
     ]
   }

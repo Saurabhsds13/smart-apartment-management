@@ -51,3 +51,30 @@ ALTER DEFAULT PRIVILEGES FOR ROLE societix_migrator IN SCHEMA public
 
 `SOCIETIX_DB_USERNAME`/`SOCIETIX_DB_PASSWORD` (see `application.yml`) point the running app at
 `societix_app`; migrations run (in CI/deploy) as `societix_migrator`.
+
+## Audit records: append-only immutability (Req 16.4, BR6)
+
+The `audit_records` table (migration `V3__audit_records.sql`) is append-only: once written, an
+audit record can never be modified or removed. This is enforced in two independent layers, mirroring
+the two-role model above:
+
+1. **In-migration, role-independent backstop.** A `BEFORE UPDATE OR DELETE` trigger
+   (`trg_audit_records_immutable`) unconditionally raises an exception, so any `UPDATE` or `DELETE`
+   against a stored audit row fails — from any role and through any path (application, ad-hoc SQL,
+   or a future migration). `INSERT` is not guarded, so the append-only write path keeps working.
+
+2. **Least-privilege operational step.** The application **runtime role** is granted only
+   `INSERT`/`SELECT` on `audit_records`; its `UPDATE`/`DELETE` privileges are revoked. As with role
+   creation, this is performed operationally (outside the application's own migrations) when
+   provisioning the runtime role, because the migration does not create or alter that role. Run once
+   by the owner/DBA after migrations, against each environment:
+
+   ```sql
+   -- Default privileges from ALTER DEFAULT PRIVILEGES (above) grant the runtime role all DML on
+   -- new tables; narrow audit_records back to append-only for that role.
+   REVOKE UPDATE, DELETE ON audit_records FROM societix_app;
+   ```
+
+The application itself has no update/delete code path for audit records (the `AuditService` API
+exposes only `record(...)` and read queries), so these database safeguards are defense-in-depth that
+make immutability a database-enforced guarantee rather than a convention.

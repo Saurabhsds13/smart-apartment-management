@@ -3,7 +3,7 @@
   Societix backend logging configuration (Req 21.1, 21.2, 21.4, 21.5).
 
   Approach / justification
-  ------------------------
+  ========================
   We use Spring Boot 3.4's BUILT-IN structured logging (org.springframework.boot.logging.logback.
   StructuredLogEncoder) rather than adding a third-party encoder such as net.logstash.logback.
   Rationale:
@@ -18,14 +18,14 @@
       structured log line without any per-statement wiring (Req 21.1).
 
   Profile gating
-  --------------
+  ==============
   * local / test : human-readable console pattern (easier local debugging). The pattern still
     prints the correlation id and society id from the MDC so developers see them while iterating.
   * prod (and any other profile) : JSON (ECS) via StructuredLogEncoder for machine ingestion by log
     aggregators (ElasticSearch/OpenSearch/Logstash/Graylog).
 
   Logging hygiene (Req 21.4, 21.5)
-  --------------------------------
+  ================================
   * Only non-sensitive correlation metadata (correlationId, societyId) is added to the MDC and thus
     to log lines. NEVER log secrets (passwords, tokens, MFA secrets, session ids) or full PII
     records. Application code is responsible for not passing such values into log messages; this

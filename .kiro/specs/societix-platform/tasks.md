@@ -95,57 +95,57 @@ Tasks depending on qualified legal/tax review (DPDP interpretation, applicable t
 - [x] 6. M1 Checkpoint
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 7. M2 — Tenancy foundation and Society entity
-  - [~] 7.1 Create societies entity and migration
+- [x] 7. M2 — Tenancy foundation and Society entity
+  - [x] 7.1 Create societies entity and migration
     - `societies` table (id, name, status active/suspended, timestamps); JPA entity + repository in `tenancy.internal`
     - _Requirements: 13.1, 13.3, 1.1_
 
-  - [~] 7.2 Implement TenantContext request-scoped holder
+  - [x] 7.2 Implement TenantContext request-scoped holder
     - Request-scoped `TenantContext` populated only from the authenticated session; `currentSocietyId()`, `isPlatformAdmin()`, `isResolved()`; never from client input
     - Servlet filter populates context after authentication
     - _Requirements: 1.2, 1.3, BR1_
 
-  - [~] 7.3 Implement central tenant-scoping base repository and Hibernate filter
+  - [x] 7.3 Implement central tenant-scoping base repository and Hibernate filter
     - Enable `societyFilter` (param `societyId`) on every session for tenant-owned entities; base repository/specification enforces the `society_id` predicate so unscoped queries are impossible
     - Abort + return zero rows when `TenantContext` unresolved; reject client-supplied society id differing from server context
     - _Requirements: 1.4, 1.5, 1.6, 1.8_
 
-  - [~] 7.4 Write property test for tenant-context requirement
+  - [x] 7.4 Write property test for tenant-context requirement
     - **Property 2: Tenant-context requirement for tenant-owned operations**
     - **Validates: Requirements 1.3, 1.4, 1.6**
 
-  - [~] 7.5 Write tenant-isolation tests for the scoping layer
+  - [x] 7.5 Write tenant-isolation tests for the scoping layer
     - Cross-tenant query/list/search returns only in-tenant rows; unresolved context returns zero rows; mismatched client society id rejected
     - _Requirements: 1.4, 1.5, 1.6, 1.8_
 
-- [ ] 8. M2 — PostgreSQL Row-Level Security (defense-in-depth)
-  - [~] 8.1 Implement RLS GUC setter and connection-pool reset
+- [x] 8. M2 — PostgreSQL Row-Level Security (defense-in-depth)
+  - [x] 8.1 Implement RLS GUC setter and connection-pool reset
     - `TenantScope.applyToSession` issues `SET LOCAL app.current_society = :id` at transaction start; pool on-return hook issues `RESET app.current_society`
     - _Requirements: 1.5, 1.10_
 
-  - [~] 8.2 Add RLS policies via Flyway migration
+  - [x] 8.2 Add RLS policies via Flyway migration
     - Migration enables `ROW LEVEL SECURITY` + `FORCE ROW LEVEL SECURITY` and `CREATE POLICY tenant_isolation USING (society_id = current_setting('app.current_society', true)::uuid)` on tenant-owned tables; dedicated Platform_Admin audited bypass path
     - _Requirements: 1.5, 1.14_
 
-  - [~] 8.3 Write integration tests for RLS enforcement
+  - [x] 8.3 Write integration tests for RLS enforcement
     - Verify cross-tenant reads/writes are denied at the DB layer with RLS enabled; GUC never leaks across pooled connections
     - _Requirements: 1.5, 1.6_
 
-- [ ] 9. M2 — Identity: users, memberships, password hashing
-  - [~] 9.1 Create users and user_society_memberships entities and migrations
+- [x] 9. M2 — Identity: users, memberships, password hashing
+  - [x] 9.1 Create users and user_society_memberships entities and migrations
     - `users` (platform-level: email UQ, email_verified, password_hash, full_name, status, failed_attempts, lockout_until); `user_society_memberships` (user_id, society_id, role enum of 11 roles, scope, status, UQ user+society+role); minimization per RD8 (no Aadhaar/PAN/DOB)
     - _Requirements: 2.1, 3.1, 3.6, 18.1, A2_
 
-  - [~] 9.2 Implement adaptive password hashing
+  - [x] 9.2 Implement adaptive password hashing
     - Store only salted adaptive one-way hash; enforce 12–128 char password policy
     - _Requirements: 2.3, 2.4_
 
-  - [~] 9.3 Write property test for password hashing
+  - [x] 9.3 Write property test for password hashing
     - **Property 11: Password hashing (salted adaptive one-way, never plaintext, unique salt)**
     - **Validates: Requirements 2.4**
 
 - [ ] 10. M2 — Authentication, sessions, lockout, reset, verification
-  - [~] 10.1 Implement Spring Security server-side sessions with secure cookies + CSRF
+  - [x] 10.1 Implement Spring Security server-side sessions with secure cookies + CSRF
     - Session cookie `Secure`, `HttpOnly`, `SameSite`; synchronizer-token CSRF for unsafe methods; reject requests over unencrypted transport at app edge
     - _Requirements: 2.1, 17.8, 17.9, A7_
 
@@ -162,18 +162,18 @@ Tasks depending on qualified legal/tax review (DPDP interpretation, applicable t
     - Lockout threshold/window, progressive non-permanent lockout, idle/absolute timeouts, logout invalidation, reset/verification token single-use + expiry, account-enumeration-safe errors
     - _Requirements: 2.2, 2.5, 2.6, 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.14, 2.15_
 
-- [ ] 11. M2 — Audit service (transactional append-only)
-  - [~] 11.1 Create audit_records entity, migration, and AuditService
+- [x] 11. M2 — Audit service (transactional append-only)
+  - [x] 11.1 Create audit_records entity, migration, and AuditService
     - `audit_records` (society_id nullable for platform events, actor, action, target_type/id, before/after summary JSONB, occurred_at UTC); `AuditService.record` runs inside the originating service transaction (no async)
     - DB-enforced immutability: REVOKE UPDATE/DELETE on runtime role + BEFORE UPDATE/DELETE trigger; no app update/delete path
     - Tenant-scoped audit queries (except Platform_Admin platform scope)
     - _Requirements: 16.1, 16.2, 16.3, 16.4, 16.5, 16.6, BR6_
 
-  - [~] 11.2 Write property test for audit atomicity
+  - [x] 11.2 Write property test for audit atomicity
     - **Property 9: Audit-atomicity invariant (state change persisted iff audit record persisted)**
     - **Validates: Requirements 16.1, 16.2, 16.3, 16.6**
 
-  - [~] 11.3 Write integration test for audit immutability
+  - [x] 11.3 Write integration test for audit immutability
     - Verify application has no update/delete path and DB trigger/privilege blocks modification of stored audit records
     - _Requirements: 16.4, BR6_
 

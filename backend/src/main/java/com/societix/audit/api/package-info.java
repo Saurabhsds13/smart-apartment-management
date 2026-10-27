@@ -5,7 +5,8 @@
  * state change.
  *
  * <p>Holds the in-process service interfaces and DTOs other modules may depend on.
- * Allowed dependencies: foundation (no domain deps). Other modules must not reach into
+ * Allowed dependencies: {@code tenancy} (foundation) for server-side tenant scoping of audit
+ * queries, plus {@code common}. No domain-module deps. Other modules must not reach into
  * {@code com.societix.audit.internal}; ArchUnit tests enforce this boundary.
  */
 package com.societix.audit.api;

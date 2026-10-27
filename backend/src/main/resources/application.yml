@@ -18,6 +18,34 @@ spring:
   main:
     banner-mode: "off"
 
+# ---------------------------------------------------------------------------
+# Server / HTTP (Spring Security server-side sessions — design ADR-3; Req 2.1, 17.8, 17.9).
+#
+# Session-cookie hardening (base, profile-independent):
+#   - http-only:  true  -> the session cookie is never readable by JavaScript, so an XSS flaw
+#                          cannot exfiltrate the session (ADR-3). The CSRF token cookie
+#                          (XSRF-TOKEN) is intentionally NOT HttpOnly and is configured in code
+#                          (SecurityConfig) so the SPA can read and echo it.
+#   - same-site:  Lax   -> blocks the cookie on cross-site sub-requests (CSRF defence-in-depth)
+#                          while still allowing it on top-level navigations, which is the right
+#                          balance for a same-origin SPA the user navigates to directly. (Strict
+#                          would break returning to the app via an external link; Lax is the
+#                          design's stated default with Strict "where feasible".)
+#   - secure:           -> left unset at the base so local/test over plain HTTP still works; the
+#                          prod profile pins it to `true` so the cookie is only ever sent over TLS.
+#
+# forward-headers-strategy=framework makes Spring honour X-Forwarded-Proto/Host/For from the
+# TLS-terminating reverse proxy (design "Deployment Architecture"), so the prod channel-security
+# check (requiresSecure) and absolute-URL generation see the real client scheme.
+server:
+  forward-headers-strategy: framework
+  servlet:
+    session:
+      cookie:
+        name: SOCIETIXSESSION
+        http-only: true
+        same-site: lax
+
   jpa:
     open-in-view: false
     hibernate:
@@ -218,16 +246,23 @@ spring:
     clean-disabled: true
     validate-on-migrate: true
 
-# Prod actuator hardening until Spring Security gates the endpoints (task 10.1):
-#   - restrict HTTP exposure to liveness/readiness health only; the Prometheus scrape
-#     endpoint is re-enabled behind authn/authz in task 10.1 (or served on a separate,
-#     network-restricted management port).
-#   - never leak component/health details to unauthenticated callers.
+  # Prod session cookie: only ever sent over TLS (the reverse proxy terminates HTTPS and the
+  # app rejects plain HTTP at the edge — see SecurityConfig requiresSecure + Req 17.9).
+  servlet:
+    session:
+      cookie:
+        secure: true
+
+# Prod actuator exposure, now gated by Spring Security (task 10.1 enforces what task 2.3 promised):
+#   - the Prometheus scrape + metrics endpoints are RE-ENABLED over HTTP but are no longer public;
+#     SecurityConfig requires authentication for everything under /actuator/** in prod, while
+#     /actuator/health (+ liveness/readiness probe sub-paths) stays public for the orchestrator.
+#   - health still leaks no component/detail to unauthenticated callers.
 management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health,info,prometheus,metrics
   endpoint:
     health:
       show-details: never

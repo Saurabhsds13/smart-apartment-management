@@ -5,6 +5,7 @@ import com.societix.common.api.ConflictException;
 import com.societix.common.api.NotFoundException;
 import com.societix.common.api.ProblemDetail;
 import com.societix.common.api.RateLimitExceededException;
+import com.societix.common.api.ValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -83,6 +84,20 @@ public class GlobalExceptionHandler {
                         .toList();
         return build(HttpStatus.BAD_REQUEST, "validation", "Validation failed",
                 "One or more fields are invalid.", request, fieldErrors);
+    }
+
+    /**
+     * Handles service-layer validation failures raised in domain code (rules that cannot be
+     * expressed as a declarative {@code @Valid} constraint — e.g. the identity password policy,
+     * Req 2.3). Produces a {@code 400} envelope carrying the exception's client-safe field errors.
+     * The rejected value is never echoed (Req 17.10).
+     */
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ProblemDetail> handleValidation(
+            ValidationException ex, HttpServletRequest request) {
+
+        return build(HttpStatus.BAD_REQUEST, "validation", "Validation failed",
+                "One or more fields are invalid.", request, ex.getFieldErrors());
     }
 
     // --- Authentication (401) ----------------------------------------------
