@@ -149,16 +149,16 @@ Tasks depending on qualified legal/tax review (DPDP interpretation, applicable t
     - Session cookie `Secure`, `HttpOnly`, `SameSite`; synchronizer-token CSRF for unsafe methods; reject requests over unencrypted transport at app edge
     - _Requirements: 2.1, 17.8, 17.9, A7_
 
-  - [~] 10.2 Implement login throttling/lockout and session lifetime policy
+  - [x] 10.2 Implement login throttling/lockout and session lifetime policy
     - Lockout after 5 failed attempts / 15 min, initial 15-min lockout, progressive delays, never permanent; generic error not revealing account existence
     - Idle timeout 30 min (admin/finance) / 60 min (resident), 12h absolute max lifetime; logout invalidates session
     - _Requirements: 2.2, 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.15_
 
-  - [~] 10.3 Implement password reset and email verification
+  - [x] 10.3 Implement password reset and email verification
     - Single-use reset credential expiring 60 min via email; reject expired/used tokens leaving password unchanged; single-use email-verification credential before treating email as verified
     - _Requirements: 2.5, 2.6, 2.14_
 
-  - [~] 10.4 Write authentication and session-policy tests
+  - [x] 10.4 Write authentication and session-policy tests
     - Lockout threshold/window, progressive non-permanent lockout, idle/absolute timeouts, logout invalidation, reset/verification token single-use + expiry, account-enumeration-safe errors
     - _Requirements: 2.2, 2.5, 2.6, 2.7, 2.8, 2.9, 2.10, 2.11, 2.12, 2.14, 2.15_
 
@@ -178,7 +178,7 @@ Tasks depending on qualified legal/tax review (DPDP interpretation, applicable t
     - _Requirements: 16.4, BR6_
 
 - [ ] 12. M2 — Authorization: role/permission model and Permission Matrix
-  - [~] 12.1 Encode the Permission Matrix and role/permission model
+  - [x] 12.1 Encode the Permission Matrix and role/permission model
     - Define 11 roles and `Permission` values (operation × resource type); load the Permission Matrix as the authoritative mapping at startup
     - Society_Admin role assignments scoped to own society; reject assignment outside Tenant_Context
     - _Requirements: 3.1, 3.4, 3.5, 3.6, 3.7, 3.8_

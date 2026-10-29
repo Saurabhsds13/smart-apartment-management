@@ -1,5 +1,7 @@
 package com.societix.identity.internal;
 
+import com.societix.identity.api.MembershipRole;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

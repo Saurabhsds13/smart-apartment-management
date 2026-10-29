@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.societix.common.internal.CorrelationIdFilter;
 import com.societix.identity.internal.SecurityConfig;
+import com.societix.identity.internal.SessionLifecycleFilter;
 import com.societix.tenancy.internal.TenantContextFilter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
         controllers = SecurityConfigProdChannelTest.PingController.class,
         excludeFilters = {
             @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = TenantContextFilter.class),
+            @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SessionLifecycleFilter.class),
             @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = CorrelationIdFilter.class)
         })
 @Import(SecurityConfig.class)

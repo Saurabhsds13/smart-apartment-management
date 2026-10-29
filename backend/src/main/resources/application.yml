@@ -41,6 +41,11 @@ server:
   forward-headers-strategy: framework
   servlet:
     session:
+      # Baseline idle timeout = the most conservative role timeout (30 min, admin/finance).
+      # Resident roles get the longer 60-min idle window and the 12h absolute cap is enforced
+      # per-request by SessionLifecyclePolicy/Filter (Req 2.10-2.12), since the servlet
+      # container supports only a single global idle timeout.
+      timeout: 30m
       cookie:
         name: SOCIETIXSESSION
         http-only: true

@@ -1,4 +1,4 @@
-package com.societix.identity.internal;
+package com.societix.identity.api;
 
 /**
  * The 11 platform roles (design.md "Data Models" &gt; user_society_memberships, ADR-4; Req 3.1).

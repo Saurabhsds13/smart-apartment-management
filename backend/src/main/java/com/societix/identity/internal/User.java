@@ -82,6 +82,20 @@ public class User {
     @Column(name = "lockout_until")
     private OffsetDateTime lockoutUntil;
 
+    /**
+     * Start of the current rolling failed-attempt window, or {@code null} when no failures are
+     * pending. Failed attempts are counted over a fixed window from this instant (Req 2.7).
+     */
+    @Column(name = "failure_window_started_at")
+    private OffsetDateTime failureWindowStartedAt;
+
+    /**
+     * Number of lockout cycles the account has incurred, driving the progressively-longer (but
+     * bounded, never permanent) backoff (Req 2.8). Reset to zero on a successful sign-in.
+     */
+    @Column(name = "lockout_count", nullable = false)
+    private int lockoutCount = 0;
+
     /** Row-creation instant (UTC). Database-managed via the column default; read-only in JPA. */
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false)
     private OffsetDateTime createdAt;
@@ -172,6 +186,22 @@ public class User {
 
     public void setLockoutUntil(OffsetDateTime lockoutUntil) {
         this.lockoutUntil = lockoutUntil;
+    }
+
+    public OffsetDateTime getFailureWindowStartedAt() {
+        return failureWindowStartedAt;
+    }
+
+    public void setFailureWindowStartedAt(OffsetDateTime failureWindowStartedAt) {
+        this.failureWindowStartedAt = failureWindowStartedAt;
+    }
+
+    public int getLockoutCount() {
+        return lockoutCount;
+    }
+
+    public void setLockoutCount(int lockoutCount) {
+        this.lockoutCount = lockoutCount;
     }
 
     public OffsetDateTime getCreatedAt() {
