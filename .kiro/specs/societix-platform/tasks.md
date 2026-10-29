@@ -144,7 +144,7 @@ Tasks depending on qualified legal/tax review (DPDP interpretation, applicable t
     - **Property 11: Password hashing (salted adaptive one-way, never plaintext, unique salt)**
     - **Validates: Requirements 2.4**
 
-- [ ] 10. M2 — Authentication, sessions, lockout, reset, verification
+- [x] 10. M2 — Authentication, sessions, lockout, reset, verification
   - [x] 10.1 Implement Spring Security server-side sessions with secure cookies + CSRF
     - Session cookie `Secure`, `HttpOnly`, `SameSite`; synchronizer-token CSRF for unsafe methods; reject requests over unencrypted transport at app edge
     - _Requirements: 2.1, 17.8, 17.9, A7_
@@ -177,47 +177,47 @@ Tasks depending on qualified legal/tax review (DPDP interpretation, applicable t
     - Verify application has no update/delete path and DB trigger/privilege blocks modification of stored audit records
     - _Requirements: 16.4, BR6_
 
-- [ ] 12. M2 — Authorization: role/permission model and Permission Matrix
+- [x] 12. M2 — Authorization: role/permission model and Permission Matrix
   - [x] 12.1 Encode the Permission Matrix and role/permission model
     - Define 11 roles and `Permission` values (operation × resource type); load the Permission Matrix as the authoritative mapping at startup
     - Society_Admin role assignments scoped to own society; reject assignment outside Tenant_Context
     - _Requirements: 3.1, 3.4, 3.5, 3.6, 3.7, 3.8_
 
-  - [~] 12.2 Implement function-level authorization
+  - [x] 12.2 Implement function-level authorization
     - `@PreAuthorize`/custom `PermissionEvaluator` checks role/permission and scope (P/S/F/A) before execution; denied ops cause no partial state change; role changes re-evaluated next request
     - _Requirements: 3.2, 3.3, 17.1_
 
-  - [~] 12.3 Implement object-level (BOLA/IDOR) checks
+  - [x] 12.3 Implement object-level (BOLA/IDOR) checks
     - Every by-id access verifies object `society_id` matches TenantContext and flat-scoped roles own the object's flat; cross-tenant/unowned returns not-found indistinguishable from nonexistent
     - _Requirements: 1.7, 18.2, 18.3_
 
-  - [~] 12.4 Write property test for permission-matrix enforcement
+  - [x] 12.4 Write property test for permission-matrix enforcement
     - **Property 10: Permission-matrix enforcement (authorize iff matrix permits; no partial state change on deny)**
     - **Validates: Requirements 3.2, 3.3, 3.8**
 
-  - [~] 12.5 Write object-level tenant-isolation tests (BOLA/IDOR)
+  - [x] 12.5 Write object-level tenant-isolation tests (BOLA/IDOR)
     - By-id access to another society's resource returns not-found; flat-scoped roles cannot access other flats' objects
     - _Requirements: 1.7, 18.3_
 
-- [ ] 13. M2 — Multi-factor authentication (MFA)
-  - [~] 13.1 Create mfa_credentials entity and TOTP enrollment
+- [x] 13. M2 — Multi-factor authentication (MFA)
+  - [x] 13.1 Create mfa_credentials entity and TOTP enrollment
     - `mfa_credentials` (type totp, secret_encrypted, recovery_codes_hashed single-use, enabled); encrypted secrets at rest, hashed recovery codes; enrollment verifies factor and issues single-use recovery codes; secrets never exposed
     - _Requirements: 24.4, 24.5, 24.6_
 
-  - [~] 13.2 Enforce MFA for privileged roles and step-up reauthentication
+  - [x] 13.2 Enforce MFA for privileged roles and step-up reauthentication
     - Enforce MFA on sign-in for Platform_Admin and privileged finance/society-admin roles; offer optional for residents; reject privileged sign-in without completed MFA challenge
     - Step-up reauthentication (incl. MFA factor where enabled) before sensitive operations; audit all MFA events in-transaction
     - _Requirements: 2.13, 24.1, 24.2, 24.3, 24.7, 24.8, 24.9, BR13_
 
-  - [~] 13.3 Write property test for MFA enforcement
+  - [x] 13.3 Write property test for MFA enforcement
     - **Property 12: MFA enforcement for privileged roles**
     - **Validates: Requirements 24.1, 24.2, 24.9**
 
-  - [~] 13.4 Write MFA unit/integration tests
+  - [x] 13.4 Write MFA unit/integration tests
     - Enrollment verification, recovery-code single-use + hashing, secret non-exposure, step-up reauth, MFA event audit records
     - _Requirements: 24.5, 24.6, 24.7, 24.8_
 
-- [~] 14. M2 Checkpoint — identity and tenant isolation
+- [x] 14. M2 Checkpoint — identity and tenant isolation
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 15. M3 — Society property structure (buildings and flats)

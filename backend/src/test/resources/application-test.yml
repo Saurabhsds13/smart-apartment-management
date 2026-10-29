@@ -1,0 +1,8 @@
+# Test-profile overrides. These are TEST-ONLY values, never production secrets.
+#
+# societix.mfa.encryption-key: a deterministic, throwaway AES-256 key so that any
+# full-application-context test under the `test` profile can construct SecretEncryptor
+# (task 13.1). Production supplies the real key via SOCIETIX_MFA_ENCRYPTION_KEY (Req 17.5/24.6).
+societix:
+  mfa:
+    encryption-key: c29jaWV0aXgtdGVzdC1tZmEta2V5LTAxMjM0NTY3ODk=
